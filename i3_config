@@ -12,19 +12,21 @@
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Source Code Pro for Powerline 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec sakura
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+# start dmenu (a program launcher)
+bindsym $mod++Shift+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -77,35 +79,35 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move container to workspace 1
-bindsym $mod+Shift+at move container to workspace 2
-bindsym $mod+Shift+numbersign move container to workspace 3
-bindsym $mod+Shift+dollar move container to workspace 4
-bindsym $mod+Shift+percent move container to workspace 5
-bindsym $mod+Shift+asciicircum move container to workspace 6
-bindsym $mod+Shift+ampersand move container to workspace 7
-bindsym $mod+Shift+asterisk move container to workspace 8
-bindsym $mod+Shift+parenleft move container to workspace 9
-bindsym $mod+Shift+parenright move container to workspace 10
+bindsym $mod+Shift+exclam move container to workspace $ws1
+bindsym $mod+Shift+at move container to workspace $ws2
+bindsym $mod+Shift+numbersign move container to workspace $ws3
+bindsym $mod+Shift+dollar move container to workspace $ws4
+bindsym $mod+Shift+percent move container to workspace $ws5
+bindsym $mod+Shift+asciicircum move container to workspace $ws6
+bindsym $mod+Shift+ampersand move container to workspace $ws7
+bindsym $mod+Shift+asterisk move container to workspace $ws8
+bindsym $mod+Shift+parenleft move container to workspace $ws9
+bindsym $mod+Shift+parenright move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -136,12 +138,25 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    colors {
+        # Whole color settings
+        background #000000
+        statusline #ffffff
+        separator  #666666
+
+        # Type             border  background font
+        focused_workspace  #008fff #007fff #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #aa0000 #990000 #ffffff
+    }
         status_command i3status
+
 }
 
 
 # Lock
-bindsym $MOD+SHIFT+x exec i3lock -d -i ~/.i3/images.png -n
+bindsym Mod1+l exec i3lock -d -i  /home/nitesh/Pictures/you_shall.png -n -t
 #Background
 exec --no-startup-id sh ~/.fehbg &
 #enable workspace auto back and forth
@@ -149,3 +164,56 @@ workspace_auto_back_and_forth yes
 #scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+exec --no-startup-id nm-applet
+#gnome daemon
+exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+
+##CLasses
+#assign [class="[Gg]nome-terminal"] $ws1
+
+#workspace Definition
+set $ws1 1: term
+set $ws2 2: py
+set $ws3 3: firefox
+set $ws4 4: chrome
+set $ws5 5: misc
+set $ws6 6: misc
+set $ws7 7: misc
+set $ws8 8: misc
+set $ws9 9: misc
+set $ws10 10: mail
+
+
+#SHutdown/Sleep/Hibernate/restart
+mode  "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own" {
+
+        bindsym s exec sudo pm-suspend; mode "default"
+        bindsym h exec sudo pm-hibernate; mode "default"
+        bindsym p exec sudo pm-powersave; mode "default"
+        bindsym d exec sudo shutdown -h now
+        bindsym r exec sudo shutdown -r now
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+o mode "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own"
+
+#Volume Buttons
+bindsym XF86AudioRaiseVolume exec amixer -c1 -q set Master 5%+ -q
+bindsym XF86AudioLowerVolume exec amixer -c1  -q set Master 5%- -q
+#bindsym XF86AudioMute exec amixer -c1 -q set Master toggle
+
+
+##Move right
+bindsym $mod+x move container to output right
+##Move left
+bindsym $mod+Shift+x move container to output left
+
+# Flash between workspaces
+bindsym $mod+z workspace back_and_forth
+
+#Disable touchpad 
+bindsym $mod+Shift+t exec --no-startup-id xinput disable 12
+
+#Enable Touchpad
+bindsym Mod4+t exec --no-startup-id xinput enable 12
