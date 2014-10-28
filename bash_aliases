@@ -1,6 +1,5 @@
 alias lintian='lintian -iIEcv --pedantic --color auto'
 alias git-import-dsc='git-import-dsc --author-is-committer --pristine-tar'
 alias clean='fakeroot debian/rules clean'
-alias go='sudo insmod /usr/src/acpi_call/acpi_call/acpi_call.ko && sudo /usr/src/acpi_call/acpi_call/examples/turn_off_gpu.sh'
 alias rm='rm -I'
 alias diff='colordiff'
