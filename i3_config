@@ -18,7 +18,7 @@ font pango:Source Code Pro for Powerline 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec sakura
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -79,28 +79,28 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move container to workspace $ws1
-bindsym $mod+Shift+at move container to workspace $ws2
-bindsym $mod+Shift+numbersign move container to workspace $ws3
-bindsym $mod+Shift+dollar move container to workspace $ws4
-bindsym $mod+Shift+percent move container to workspace $ws5
-bindsym $mod+Shift+asciicircum move container to workspace $ws6
-bindsym $mod+Shift+ampersand move container to workspace $ws7
-bindsym $mod+Shift+asterisk move container to workspace $ws8
-bindsym $mod+Shift+parenleft move container to workspace $ws9
-bindsym $mod+Shift+parenright move container to workspace $ws10
+bindsym $mod+Shift+exclam move container to workspace 1
+bindsym $mod+Shift+at move container to workspace 2
+bindsym $mod+Shift+numbersign move container to workspace 3
+bindsym $mod+Shift+dollar move container to workspace 4
+bindsym $mod+Shift+percent move container to workspace 5
+bindsym $mod+Shift+asciicircum move container to workspace 6
+bindsym $mod+Shift+ampersand move container to workspace 7
+bindsym $mod+Shift+asterisk move container to workspace 8
+bindsym $mod+Shift+parenleft move container to workspace 9
+bindsym $mod+Shift+parenright move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -150,7 +150,7 @@ bar {
         inactive_workspace #333333 #222222 #888888
         urgent_workspace   #aa0000 #990000 #ffffff
     }
-        status_command i3status
+        status_command i3blocks
 
 }
 
@@ -158,7 +158,7 @@ bar {
 # Lock
 bindsym Mod1+l exec i3lock -d -i  /home/nitesh/Pictures/you_shall.png -n -t
 #Background
-exec --no-startup-id sh ~/.fehbg &
+#exec --no-startup-id sh ~/.fehbg &
 #enable workspace auto back and forth
 workspace_auto_back_and_forth yes
 #scratchpad
@@ -169,20 +169,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 
 ##CLasses
-#assign [class="[Gg]nome-terminal"] $ws1
-
-#workspace Definition
-set $ws1 1: term
-set $ws2 2: py
-set $ws3 3: firefox
-set $ws4 4: chrome
-set $ws5 5: misc
-set $ws6 6: misc
-set $ws7 7: misc
-set $ws8 8: misc
-set $ws9 9: misc
-set $ws10 10: mail
-
+#assign [class="[Gg]nome-terminal"] 1
 
 #SHutdown/Sleep/Hibernate/restart
 mode  "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own" {
